@@ -128,7 +128,7 @@ def read_dash():
     with open(os.path.join(APP_STATIC, 'dashboard/dashboard.json')) as f:
         data = json.load(f)
 
-    return json.dumps(data)
+    return (json.dumps(data), {'Content-Type': 'application/json'})
 
 
 @app.route('/plugins/thirdparty/<path:filename>')
