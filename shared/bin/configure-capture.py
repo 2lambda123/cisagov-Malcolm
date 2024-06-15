@@ -359,7 +359,7 @@ def main():
     modeChoices = []
     try:
         with open(Constants.DEV_IDENTIFIER_FILE, 'r') as f:
-            installation = f.readline().strip()
+            installation = f.readline(5_000_000).strip()
     except Exception:
         pass
     if installation not in Constants.DEV_VALID:
