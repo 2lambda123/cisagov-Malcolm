@@ -105,7 +105,7 @@ d.set_background_title(Constants.MSG_BACKGROUND_TITLE)
 def network_stop(selected_iface):
     iface_state = "unknown"
     with open(f"/sys/class/net/{selected_iface}/operstate", 'r') as f:
-        iface_state = f.readline().strip()
+        iface_state = f.readline(5_000_000).strip()
 
     if iface_state == "up":
         command = f"ifdown {selected_iface}"
@@ -120,7 +120,7 @@ def network_stop(selected_iface):
 def network_start(selected_iface):
     iface_state = "unknown"
     with open(f"/sys/class/net/{selected_iface}/operstate", 'r') as f:
-        iface_state = f.readline().strip()
+        iface_state = f.readline(5_000_000).strip()
 
     if iface_state != "up":
         command = f"ifup {selected_iface}"
@@ -185,7 +185,7 @@ def main():
     modeChoices = []
     try:
         with open(Constants.DEV_IDENTIFIER_FILE, 'r') as f:
-            installation = f.readline().strip()
+            installation = f.readline(5_000_000).strip()
     except Exception:
         pass
     if installation == Constants.DEV_SENSOR:
