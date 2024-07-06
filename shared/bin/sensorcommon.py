@@ -124,12 +124,12 @@ def get_available_adapters():
         speed = '?'
         try:
             with open(f"/sys/class/net/{adapter}/address", 'r') as f:
-                mac_address = f.readline().strip()
+                mac_address = f.readline(5_000_000).strip()
         except Exception:
             pass
         try:
             with open(f"/sys/class/net/{adapter}/speed", 'r') as f:
-                speed = f.readline().strip()
+                speed = f.readline(5_000_000).strip()
         except Exception:
             pass
         description = f"{mac_address} ({speed} Mbits/sec)"
