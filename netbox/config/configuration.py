@@ -25,7 +25,7 @@ def _read_secret(secret_name: str, default: str | None = None) -> str | None:
         return default
     else:
         with f:
-            return f.readline().strip()
+            return f.readline(5_000_000).strip()
 
 
 # If the `map_fn` isn't defined, then the value that is read from the environment (or the default value if not found) is returned.
